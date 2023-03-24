@@ -1,0 +1,4 @@
+
+ALTER TABLE `role`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
+    ADD PRIMARY KEY (`id`);

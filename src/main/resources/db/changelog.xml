@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro 
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd"
+        logicalFilePath="db">
+
+    <changeSet id="create-table" author="Maksim Yukhnevich">
+        <sqlFile encoding="utf8" path="db/changelog/02.create-role.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/03.create-users.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/04.create-document.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/05.create-cars.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/06.create-status.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/07.create-orders.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/08.create-user-details.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/09.create-payment.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="add-index" author="Maksim Yukhnevich">
+        <sqlFile encoding="utf8" path="db/changelog/10.add-index-cars.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/11.add-index-orders.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/12.add-index-document.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/13.add-index-payment.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/14.add-index-role.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/15.add-index-status.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/16.add-index-users.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="db/changelog/17.add-index-user-details.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <!-- filling constant data -->
+    <changeSet id="insert-role" author="Maksim Yukhnevich">
+        <insert
+                tableName="role">
+            <column name="role" value="USER"/>
+        </insert>
+        <insert
+                tableName="role">
+            <column name="role" value="ADMIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-status" author="Maksim Yukhnevich">
+        <insert
+                tableName="status">
+            <column name="group" value="payment"/>
+            <column name="name" value="APPROVED"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="payment"/>
+            <column name="name" value="DECLINED"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="NEW"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="APPROVED"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="PAID"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="RECEIVED"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="CANCELLED"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="RETURNED"/>
+        </insert>
+        <insert
+                tableName="status">
+            <column name="group" value="orders"/>
+            <column name="name" value="REJECTED"/>
+        </insert>
+    </changeSet>
+
+    <!-- filling data for test -->
+    <changeSet id="insert-users" author="Maksim Yukhnevich">
+        <insert
+                tableName="users">
+            <column name="email" value="user@gmail.com"/>
+            <column name="password" value="12345678"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert
+                tableName="users">
+            <column name="email" value="admin@gmail.com"/>
+            <column name="password" value="admin"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-user-details" author="Maksim Yukhnevich">
+        <insert
+                tableName="user_details">
+            <column name="user_id" value="1"/>
+            <column name="phone_number" value="+375331111111"/>
+            <column name="first_name" value="Ivan"/>
+            <column name="second_name" value="Ivanov"/>
+            <column name="middle_name" value="Ivanovich"/>
+        </insert>
+        <insert
+                tableName="user_details">
+            <column name="user_id" value="2"/>
+            <column name="phone_number" value="+375332222222"/>
+            <column name="first_name" value="Jhon"/>
+            <column name="second_name" value="Kennedy"/>
+            <column name="middle_name" value="Fitzgerald"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-document" author="Maksim Yukhnevich">
+        <insert
+                tableName="document">
+            <column name="user_details_id" value="1"/>
+            <column name="hash" value="123456789ABCDE"/>
+            <column name="identifier" value="1234567A123PB1"/>
+            <column name="expiration_date" value="2030-02-01"/>
+        </insert>
+        <insert
+                tableName="document">
+            <column name="user_details_id" value="2"/>
+            <column name="hash" value="ABCDE123456789"/>
+            <column name="identifier" value="7654321A321PB2"/>
+            <column name="expiration_date" value="2025-02-01"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-cars" author="Maksim Yukhnevich">
+        <insert
+                tableName="cars">
+            <column name="brand" value="Chevrolet"/>
+            <column name="model" value="Camaro"/>
+            <column name="color" value="YELLOW"/>
+            <column name="seats" value="4"/>
+            <column name="gearbox" value="AUTOMATIC"/>
+            <column name="manufactured_year" value="2009"/>
+            <column name="engine_type" value="diesel"/>
+            <column name="price" value="55.9"/>
+            <column name="vin" value="5GAEV23738J347034"/>
+            <column name="plate" value="5912BM"/>
+            <column name="class" value="MUSCLE"/>
+        </insert>
+        <insert
+                tableName="cars">
+            <column name="brand" value="Lada"/>
+            <column name="model" value="Vesta"/>
+            <column name="color" value="WHITE"/>
+            <column name="seats" value="4"/>
+            <column name="gearbox" value="MANUAL"/>
+            <column name="manufactured_year" value="2012"/>
+            <column name="engine_type" value="PETROL"/>
+            <column name="price" value="20"/>
+            <column name="vin" value="1C5BJWBG7FL697612"/>
+            <column name="plate" value="7721EK"/>
+            <column name="class" value="SEDAN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-orders" author="Maksim Yukhnevich">
+        <insert
+                tableName="orders">
+            <column name="user_id" value="1"/>
+            <column name="car_id" value="2"/>
+            <column name="status_name" value="RETURNED"/>
+            <column name="start_date" value="2023-01-02"/>
+            <column name="end_date" value="2023-01-03"/>
+            <column name="rejection_comment" value=" "/>
+            <column name="return_comment" value="Вернул с немного прокуренным салоном"/>
+        </insert>
+    </changeSet>
+    <changeSet id="insert-payment" author="Maksim Yukhnevich">
+        <insert
+                tableName="payment">
+            <column name="order_id" value="1"/>
+            <column name="status_name" value="APPROVED"/>
+            <column name="total_price" value="20"/>
+            <column name="datetime" value="2023-01-01"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
